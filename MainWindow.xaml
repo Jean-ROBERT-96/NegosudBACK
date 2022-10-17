@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NegoSUDBack"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Negosud : Gestion" Height="650" Width="1000" ResizeMode="CanMinimize" Icon="/ressources/icones/216316_pen_icon.ico">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="900" MaxWidth="900">
+            <TextBlock Text="Negosud : Gestion des stocks" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+            <Button x:Name="exitButton" Content="Quitter" Margin="10" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="50"/>
+        </DockPanel>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBlock x:Name="searchText" Text="Entrez votre recherche :" Margin="10, 0, 10, 0"/>
+            <TextBox x:Name="searchBox" Width="300" Margin="10, 0, 10, 0"/>
+            <Button x:Name="searchButton" Content="Rechercher" Margin="10, 0, 10, 0"/>
+        </StackPanel>
 
+            <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <!-- Body -->
+            <StackPanel>
+                <Button x:Name="Add" Content="Ajouter une entité" Margin="10"/>
+                <Frame Height="520" Source="/WindowInterfaces/Frames/ArticleFrame.xaml"/>
+            </StackPanel>
+            <DockPanel Grid.Column="1">
+                <Button x:Name="articleFrameButton" Content="Article" Height="50" Margin="10" DockPanel.Dock="Top"/>
+                <Button x:Name="familyFrameButton" Content="Famille" Height="50" Margin="10" DockPanel.Dock="Top"/>
+                <Button x:Name="clientFrameButton" Content="Client" Height="50" Margin="10" DockPanel.Dock="Top"/>
+                <Button x:Name="vendorFrameButton" Content="Fournisseur" Height="50" Margin="10" DockPanel.Dock="Top"/>
+                <Button x:Name="actualizeFrameButton" Content="Actualiser" Height="50" Margin="10" DockPanel.Dock="Bottom"/>
+            </DockPanel>
+        </Grid>
     </Grid>
 </Window>

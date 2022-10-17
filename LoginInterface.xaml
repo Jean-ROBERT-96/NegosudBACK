@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NegoSUDBack"
         mc:Ignorable="d"
-        Title="LoginInterface" Height="450" Width="800">
+        Title="LoginInterface" Height="250" Width="600" ResizeMode="NoResize">
     <Grid>
-        
+        <StackPanel Margin="50, 10, 50, 10">
+            <TextBlock Text="Bonjour, connectez vous :" TextAlignment="Center" Margin="5"/>
+            <TextBlock Text="Utilisateur :" Margin="0, 5, 0, 5"/>
+            <TextBox x:Name="userBox" Margin="0, 5, 0, 5"/>
+            <TextBlock Text="Mot de passe :" Margin="0, 5, 0, 5"/>
+            <PasswordBox x:Name="passwordBox" Margin="0, 5, 0, 5"/>
+            <Button x:Name="connectButton" Content="Se connecter" Margin="0,20,0,5" Width="100"/>
+        </StackPanel>
     </Grid>
 </Window>

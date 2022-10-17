@@ -1,6 +1,6 @@
-﻿using System;
+﻿using NegoSUDBack.WindowInterfaces.Frames;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,16 +14,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NegoSUDBack
+namespace NegoSUDBack.WindowInterfaces
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour ArticleFrame.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ArticleFrame : Page
     {
-        public MainWindow()
+        EntityFrame frame;
+        public ArticleFrame()
         {
             InitializeComponent();
+            frame = new EntityFrame();
+            Display();
+        }
+
+        void Display()
+        {
+            articleScroll.Children.Add(new Frame { Margin = new Thickness(2, 5, 2, 5), Content = frame });
         }
     }
 }

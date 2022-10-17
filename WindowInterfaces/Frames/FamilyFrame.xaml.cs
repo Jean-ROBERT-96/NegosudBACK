@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NegoSUDBack
+namespace NegoSUDBack.WindowInterfaces.Frames
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour FamilyFrame.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FamilyFrame : Page
     {
-        public MainWindow()
+        public FamilyFrame()
         {
             InitializeComponent();
         }
