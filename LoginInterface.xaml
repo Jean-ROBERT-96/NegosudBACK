@@ -13,7 +13,7 @@
             <TextBox x:Name="userBox" Margin="0, 5, 0, 5"/>
             <TextBlock Text="Mot de passe :" Margin="0, 5, 0, 5"/>
             <PasswordBox x:Name="passwordBox" Margin="0, 5, 0, 5"/>
-            <Button x:Name="connectButton" Content="Se connecter" Margin="0,20,0,5" Width="100"/>
+            <Button x:Name="connectButton" Content="Se connecter" Margin="0,20,0,5" Width="100" Click="connectButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>
