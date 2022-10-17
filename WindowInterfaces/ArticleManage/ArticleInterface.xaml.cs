@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,23 @@ namespace NegoSUDBack.WindowInterfaces
     /// </summary>
     public partial class ArticleInterface : Window
     {
-        public ArticleInterface()
+        private static ArticleInterface _interface;
+        private ArticleInterface()
         {
             InitializeComponent();
+        }
+
+        public static ArticleInterface GetInstance()
+        {
+            if(_interface == null)
+                _interface = new ArticleInterface();
+
+            return _interface;
+        }
+
+        private void WindowClosing(object sender, CancelEventArgs e)
+        {
+            _interface = null;
         }
     }
 }

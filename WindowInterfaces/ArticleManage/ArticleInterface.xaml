@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NegoSUDBack.WindowInterfaces"
         mc:Ignorable="d"
-        Title="Negosud : Gestion des articles" Height="450" Width="800" ResizeMode="CanMinimize">
-    <Grid>
-        
+        Title="Negosud : Gestion des articles" Height="550" Width="500" ResizeMode="CanMinimize" Closing="WindowClosing">
+    
+<Grid Margin="10">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="20"/>
+        <RowDefinition/>
+        <RowDefinition Height="220"/>
+        <RowDefinition Height="40"/>
+    </Grid.RowDefinitions>
+    <TextBlock x:Name="typeBlock" Grid.Row="0" Text="Article : nom" TextAlignment="Center"/>
+    <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Label Content="Nom :" Target="{Binding ElementName=nameBlock}"/>
+            <TextBox x:Name="nameBlock" IsReadOnly="True"/>
+            <Label Content="Année :" Target="{Binding ElementName=yearBlock}"/>
+            <TextBox x:Name="yearBlock" IsReadOnly="True"/>
+            <Label Content="Prix :" Target="{Binding ElementName=priceBlock}"/>
+            <TextBox x:Name="priceBlock" IsReadOnly="True"/>
+            <Label Content="Quantité en stock :" Target="{Binding ElementName=quantityBlock}"/>
+            <TextBox x:Name="quantityBlock" IsReadOnly="True"/>
+            <Label Content="Famille du produit :" Target="{Binding ElementName=familyBlock}"/>
+            <TextBox x:Name="familyBlock" IsReadOnly="True"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Image Margin="10" Height="170"/>
+            <Button x:Name="uploadButton" Content="Envoyer une image..." Margin="10"/>
+        </StackPanel>
     </Grid>
+    <TextBox Grid.Row="2" TextWrapping="Wrap" Margin="5" IsReadOnly="True"/>
+    <DockPanel Grid.Row="3" HorizontalAlignment="Center">
+        <Button Content="Annuler" DockPanel.Dock="Left" Margin="10" Width="200"/>
+        <Button Content="Valier" DockPanel.Dock="Right" Margin="10" Width="200"/>
+    </DockPanel>
+</Grid>
+
 </Window>

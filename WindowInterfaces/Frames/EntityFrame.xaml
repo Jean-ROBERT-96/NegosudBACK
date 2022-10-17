@@ -39,7 +39,7 @@
             <TextBlock x:Name="descriptionBlock" TextWrapping="Wrap" Grid.Row="1"/>
         </Grid>
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-            <Button x:Name="displayButton" Content="Afficher" Margin="10"/>
+            <Button x:Name="displayButton" Content="Afficher" Margin="10" Click="displayButton_Click"/>
             <Button x:Name="editButton" Content="Editer" Margin="10"/>
             <Button x:Name="deleteButton" Content="Supprimer" Margin="10"/>
         </StackPanel>

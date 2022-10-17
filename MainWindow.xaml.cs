@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NegoSUDBack.WindowInterfaces.Frames;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -21,9 +22,18 @@ namespace NegoSUDBack
     /// </summary>
     public partial class MainWindow : Window
     {
+        EntityFrame frame;
+
         public MainWindow()
         {
             InitializeComponent();
+            frame = new EntityFrame();
+            Display();
+        }
+
+        void Display()
+        {
+            scrollFrame.Children.Add(new Frame { Margin = new Thickness(2, 5, 2, 5), Content = frame });
         }
     }
 }

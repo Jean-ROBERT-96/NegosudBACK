@@ -30,10 +30,15 @@
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <!-- Body -->
+            <!--  
             <StackPanel>
                 <Button x:Name="Add" Content="Ajouter une entité" Margin="10"/>
                 <Frame Height="520" Source="/WindowInterfaces/Frames/ArticleFrame.xaml"/>
             </StackPanel>
+                -->
+            <ScrollViewer>
+                <StackPanel x:Name="scrollFrame"/>
+            </ScrollViewer>
             <DockPanel Grid.Column="1">
                 <Button x:Name="articleFrameButton" Content="Article" Height="50" Margin="10" DockPanel.Dock="Top"/>
                 <Button x:Name="familyFrameButton" Content="Famille" Height="50" Margin="10" DockPanel.Dock="Top"/>
