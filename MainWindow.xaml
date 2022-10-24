@@ -15,7 +15,7 @@
         <!-- Header -->
         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="900" MaxWidth="900">
             <TextBlock Text="Negosud : Gestion des stocks" VerticalAlignment="Center" DockPanel.Dock="Left"/>
-            <Button x:Name="exitButton" Content="Quitter" Margin="10" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="50"/>
+            <Button x:Name="exitButton" Content="Quitter" Margin="10" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="50" Click="exitButton_Click"/>
         </DockPanel>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -30,22 +30,18 @@
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <!-- Body -->
-            <!--  
             <StackPanel>
-                <Button x:Name="Add" Content="Ajouter une entité" Margin="10"/>
-                <Frame Height="520" Source="/WindowInterfaces/Frames/ArticleFrame.xaml"/>
+                <Button x:Name="addButton" Content="Ajouter un article" Tag="article" Margin="10" Click="addButton_Click"/>
+                <ScrollViewer Height="500">
+                    <StackPanel x:Name="scrollFrame"/>
+                </ScrollViewer>
             </StackPanel>
-                -->
-            <ScrollViewer>
-                <StackPanel x:Name="scrollFrame"/>
-            </ScrollViewer>
-            <DockPanel Grid.Column="1">
-                <Button x:Name="articleFrameButton" Content="Article" Height="50" Margin="10" DockPanel.Dock="Top"/>
-                <Button x:Name="familyFrameButton" Content="Famille" Height="50" Margin="10" DockPanel.Dock="Top"/>
-                <Button x:Name="clientFrameButton" Content="Client" Height="50" Margin="10" DockPanel.Dock="Top"/>
-                <Button x:Name="vendorFrameButton" Content="Fournisseur" Height="50" Margin="10" DockPanel.Dock="Top"/>
-                <Button x:Name="actualizeFrameButton" Content="Actualiser" Height="50" Margin="10" DockPanel.Dock="Bottom"/>
-            </DockPanel>
+            <StackPanel Grid.Column="1">
+                <Button x:Name="articleFrameButton" Content="Article" Height="50" Margin="10" Click="articleFrameButton_Click"/>
+                <Button x:Name="familyFrameButton" Content="Famille" Height="50" Margin="10" Click="familyFrameButton_Click"/>
+                <Button x:Name="clientFrameButton" Content="Client" Height="50" Margin="10"/>
+                <Button x:Name="vendorFrameButton" Content="Fournisseur" Height="50" Margin="10"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NegoSUDBack.WindowInterfaces"
         mc:Ignorable="d"
-        Title="Negosud : Gestion des familles" Height="400" Width="500" ResizeMode="NoResize">
+        Title="Negosud : Gestion des familles" Height="400" Width="500" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -16,11 +16,11 @@
             <TextBlock Text="Nom :" Margin="10"/>
             <TextBox x:Name="nameBox" Margin="10" IsReadOnly="True"/>
             <TextBlock Text="Description :" Margin="10"/>
-            <TextBox x:Name="descriptionBlock" TextWrapping="Wrap" Margin="10" Height="140" IsReadOnly="True"/>
+            <TextBox x:Name="descriptionBlock" TextWrapping="Wrap" Margin="10" Height="130" IsReadOnly="True"/>
         </StackPanel>
         <DockPanel Grid.Row="1" HorizontalAlignment="Center">
-            <Button x:Name="closeButton" Content="Fermer" Margin="15" DockPanel.Dock="Left" Width="200"/>
-            <Button x:Name="validButton" Content="Valider" Margin="15" DockPanel.Dock="Right" Width="200" Visibility="Hidden"/>
+            <Button x:Name="closeButton" Content="Fermer" Margin="15" DockPanel.Dock="Left" Width="200" Click="closeButton_Click"/>
+            <Button x:Name="validButton" Content="Valider" Margin="15" DockPanel.Dock="Right" Width="200" Visibility="Hidden" Click="validButton_Click"/>
         </DockPanel>
     </Grid>
 </Window>

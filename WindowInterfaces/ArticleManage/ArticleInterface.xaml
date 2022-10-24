@@ -11,7 +11,7 @@
     <Grid.RowDefinitions>
         <RowDefinition Height="20"/>
         <RowDefinition/>
-        <RowDefinition Height="220"/>
+        <RowDefinition Height="210"/>
         <RowDefinition Height="40"/>
     </Grid.RowDefinitions>
     <TextBlock x:Name="typeBlock" Grid.Row="0" Text="Article : nom" TextAlignment="Center"/>
@@ -37,10 +37,10 @@
             <Button x:Name="uploadButton" Content="Envoyer une image..." Margin="10"/>
         </StackPanel>
     </Grid>
-    <TextBox Grid.Row="2" TextWrapping="Wrap" Margin="5" IsReadOnly="True"/>
+    <TextBox x:Name="descriptionBlock" Grid.Row="2" TextWrapping="Wrap" Margin="5" IsReadOnly="True"/>
     <DockPanel Grid.Row="3" HorizontalAlignment="Center">
-        <Button Content="Annuler" DockPanel.Dock="Left" Margin="10" Width="200"/>
-        <Button Content="Valier" DockPanel.Dock="Right" Margin="10" Width="200"/>
+        <Button x:Name="closeButton"  Content="Annuler" DockPanel.Dock="Left" Margin="10" Width="200" Click="closeButton_Click"/>
+        <Button x:Name="validButton" Content="Valider" DockPanel.Dock="Right" Margin="10" Width="200" Click="validButton_Click"/>
     </DockPanel>
 </Grid>
 

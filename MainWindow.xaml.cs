@@ -1,5 +1,7 @@
 ﻿using NegoSUDBack.Models;
+using NegoSUDBack.WindowInterfaces;
 using NegoSUDBack.WindowInterfaces.Frames;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -7,6 +9,8 @@ using System.Data;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json.Nodes;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,76 +31,126 @@ namespace NegoSUDBack
     public partial class MainWindow : Window
     {
         HttpClient client;
-        List<Article> listArticle;
-        List<Family> listFamily;
+        public List<Article> listArticle { get; set; }
+        public List<Family> listFamily { get; set; }
 
         public MainWindow()
         {
+            Application.Current.MainWindow = this;
             InitializeComponent();
             client = new HttpClient();
+            listArticle = new List<Article>();
+            listFamily = new List<Family>();
             Initialization("article");
         }
 
-        async void Initialization(string type)
+        public async void Initialization(string type)
         {
-            using(client)
+            string data = null;
+            using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri($"http://negoapi.fr:81/api/");
                 HttpResponseMessage response;
-                switch(type)
+                switch (type)
                 {
                     case "article":
                         response = await client.GetAsync("article");
+                        addButton.Tag = type;
+                        addButton.Content = "Ajouter un article";
                         break;
                     case "family":
                         response = await client.GetAsync("family");
+                        addButton.Tag = type;
+                        addButton.Content = "Ajouter une famille";
                         break;
                     case "client":
                         response = await client.GetAsync("client");
+                        addButton.Tag = type;
+                        addButton.Content = "Ajouter un client";
                         break;
                     case "vendor":
                         response = await client.GetAsync("vendor");
+                        addButton.Tag = type;
+                        addButton.Content = "Ajouter un fournisseur";
                         break;
                     default:
                         response = null;
                         break;
                 }
-                
-                if(response.IsSuccessStatusCode)
-                {
-                    var data = response.Content.ReadAsStringAsync().Result;
-                    switch(type)
-                    {
-                        case "article":
-                            listArticle = JObject.Parse(data).ToObject<List<Article>>();
-                            break;
-                        case "family":
-                            listFamily = JObject.Parse(data).ToObject<List<Family>>();
-                            break;
-                        default:
-                            scrollFrame.Children.Add(new TextBlock { Margin = new Thickness(2, 5, 2, 5), Text = "Non disponible.", TextAlignment = TextAlignment.Center });
-                            break;
-                    }
-                }
-                else
-                {
-                    scrollFrame.Children.Add(new TextBlock { Margin = new Thickness(2, 5, 2, 5), Text = "Erreur de requête", TextAlignment = TextAlignment.Center });
-                }
+
+                data = response.Content.ReadAsStringAsync().Result;
             }
 
-            if(type == "article")
+            if (data != "[]")
             {
-                foreach(Article a in listArticle)
+                switch (type)
                 {
-                    scrollFrame.Children.Add(new Frame { Margin = new Thickness(2, 5, 2, 5), Content = new EntityFrame() });
+                    case "article":
+                        listArticle = JsonConvert.DeserializeObject<List<Article>>(data).ToList();
+                        break;
+                    case "family":
+                        listFamily = JsonConvert.DeserializeObject<List<Family>>(data).ToList();
+                        break;
+                    default:
+                        scrollFrame.Children.Add(new TextBlock { Margin = new Thickness(2, 5, 2, 5), Text = "Non disponible.", TextAlignment = TextAlignment.Center });
+                        break;
+                }
+                Display(type);
+            }
+            else
+            {
+                scrollFrame.Children.Add(new TextBlock { Margin = new Thickness(2, 5, 2, 5), Text = "Aucun résultat.", TextAlignment = TextAlignment.Center });
+            }
+        }
+
+        void Display(string type)
+        {
+            if (type == "article")
+            {
+                foreach (Article a in listArticle)
+                {
+                    scrollFrame.Children.Add(new Frame { Margin = new Thickness(2, 5, 2, 5), Content = new EntityFrame(a) });
                 }
             }
-            else if(type == "family")
+            else if (type == "family")
             {
                 foreach (Family f in listFamily)
                 {
-                    scrollFrame.Children.Add(new Frame { Margin = new Thickness(2, 5, 2, 5), Content = new EntityFrame() });
+                    scrollFrame.Children.Add(new Frame { Margin = new Thickness(2, 5, 2, 5), Content = new EntityFrame(f) });
                 }
+            }
+        }
+
+        private void articleFrameButton_Click(object sender, RoutedEventArgs e)
+        {
+            scrollFrame.Children.Clear();
+            if(listArticle != null)
+                listArticle.Clear();
+            Initialization("article");
+        }
+
+        private void familyFrameButton_Click(object sender, RoutedEventArgs e)
+        {
+            scrollFrame.Children.Clear();
+            if(listArticle != null)
+                listFamily.Clear();
+            Initialization("family");
+        }
+
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (addButton.Tag == "article")
+                ArticleInterface.GetInstance(null, "add").Show();
+            else if (addButton.Tag == "family")
+                FamilyInterface.GetInstance(null, "add").Show();
+        }
+
+        private void exitButton_Click(object sender, RoutedEventArgs e)
+        {
+            var rep = MessageBox.Show("Voulez vous quitter? Toutes informations non sauvegadé sera perdu.", "Quitter le logiciel", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if(rep == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
             }
         }
     }

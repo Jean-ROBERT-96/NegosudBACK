@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NegoSUDBack.Models
 {
-    internal class Family
+    public class Family
     {
         public int id { get; set; }
         public string type { get; set; }
