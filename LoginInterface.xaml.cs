@@ -21,9 +21,6 @@ using System.Windows.Shapes;
 
 namespace NegoSUDBack
 {
-    /// <summary>
-    /// Logique d'interaction pour LoginInterface.xaml
-    /// </summary>
     public partial class LoginInterface : Window
     {
         public LoginInterface()
