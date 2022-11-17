@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -30,37 +31,51 @@ namespace NegoSUDBack
 
         private async void connectButton_Click(object sender, RoutedEventArgs e)
         {
-            using(HttpClient client = new HttpClient())
+            userBox.IsEnabled = false;
+            passwordBox.IsEnabled = false;
+            connectButton.IsEnabled = false;
+            try
             {
-                client.BaseAddress = new Uri($"http://negoapi.fr:81/api/user/");
-                var response = await client.GetAsync(userBox.Text);
-                
-                if(response.IsSuccessStatusCode)
+                using (HttpClient client = new HttpClient())
                 {
-                    
-                    var data = response.Content.ReadAsStringAsync().Result;
-                    var json = JObject.Parse(data).ToObject<User>();
-                    response.EnsureSuccessStatusCode();
+                    client.BaseAddress = new Uri($"http://negoapi.fr:81/api/user/");
+                    var response = await client.GetAsync(userBox.Text);
 
-                    if (passwordBox.Password == json.password)
+                    if (response.IsSuccessStatusCode)
                     {
-                        MainWindow main = new MainWindow();
-                        main.Show();
-                        Close();
+
+                        var data = response.Content.ReadAsStringAsync().Result;
+                        var json = JObject.Parse(data).ToObject<User>();
+                        response.EnsureSuccessStatusCode();
+
+                        if (passwordBox.Password == json.password)
+                        {
+                            MainWindow main = new MainWindow();
+                            main.Show();
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Mot de passe incorect.", "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
+                            passwordBox.Password = "";
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Mot de passe incorect.", "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Utilisateur introuvable. Veuillez entrer un utilisateur valide.", "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
+                        userBox.Text = "";
                         passwordBox.Password = "";
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Utilisateur introuvable. Veuillez entrer un utilisateur valide.", "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
-                    userBox.Text = "";
-                    passwordBox.Password = "";
-                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Erreur de connexion : {ex.Message}", "Echec de connexion", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            userBox.IsEnabled = true;
+            passwordBox.IsEnabled = true;
+            connectButton.IsEnabled = true;
         }
     }
 }
